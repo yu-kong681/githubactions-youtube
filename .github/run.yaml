@@ -1,3 +1,4 @@
+name: push-branch
 on:
   push:
     branches:
