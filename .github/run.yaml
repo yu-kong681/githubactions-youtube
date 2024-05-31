@@ -1,10 +1,14 @@
+on:
+  push:
+    branches:
+      [main]
 # アクション名
 name: Jest
 
 # タイミングを指定
 on:
-  pull_request:
-    types: [opened, reopened, synchronize, ready_for_review]
+  pull_request: #プルリクエストを実行したら、
+    types: [opened, reopened, synchronize, ready_for_review] #作成時も再作成時も、Pushするたびに、レビューができる状態になったら、ワークフローを実行する
 
 env:
   WORKING_DIRECTORY: application
@@ -13,7 +17,7 @@ jobs:
   Test:
     name: Run test codes
     if: |
-      github.event.pull_request.draft == false
+      github.event.pull_request.draft == false 
       && !startsWith(github.head_ref, 'release')
       && !startsWith(github.head_ref, 'doc')
     runs-on: ubuntu-latest
